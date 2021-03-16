@@ -497,13 +497,13 @@
           "lib/netstandard2.1/MySql.Data.EntityFrameworkCore.dll": {}
         }
       },
-      "MySqlConnector/0.69.9": {
+      "MySqlConnector/1.0.0": {
         "type": "package",
         "compile": {
-          "lib/netcoreapp3.0/MySqlConnector.dll": {}
+          "lib/net5.0/MySqlConnector.dll": {}
         },
         "runtime": {
-          "lib/netcoreapp3.0/MySqlConnector.dll": {}
+          "lib/net5.0/MySqlConnector.dll": {}
         }
       },
       "NETStandard.Library/1.6.0": {
@@ -2775,10 +2775,10 @@
         "mysql.data.entityframeworkcore.nuspec"
       ]
     },
-    "MySqlConnector/0.69.9": {
-      "sha512": "WpY4jWc5ee5kgKy3XAK9JMjRmn7+jLYCgDlYvFK+GTrzaiWDWoYLbtJge6l1tqo2teUAP3kzzsJpP8QwJM1W4Q==",
+    "MySqlConnector/1.0.0": {
+      "sha512": "7meR9elqyw/cF67N19MCKYzZjtyMJBlaCvjOC53XbrRQcvzER1sICpzcHwpsZF7sTxhHDZk6b3J25IOvSJaj6A==",
       "type": "package",
-      "path": "mysqlconnector/0.69.9",
+      "path": "mysqlconnector/1.0.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -2788,6 +2788,8 @@
         "lib/net461/MySqlConnector.xml",
         "lib/net471/MySqlConnector.dll",
         "lib/net471/MySqlConnector.xml",
+        "lib/net5.0/MySqlConnector.dll",
+        "lib/net5.0/MySqlConnector.xml",
         "lib/netcoreapp2.1/MySqlConnector.dll",
         "lib/netcoreapp2.1/MySqlConnector.xml",
         "lib/netcoreapp3.0/MySqlConnector.dll",
@@ -2799,7 +2801,7 @@
         "lib/netstandard2.1/MySqlConnector.dll",
         "lib/netstandard2.1/MySqlConnector.xml",
         "logo.png",
-        "mysqlconnector.0.69.9.nupkg.sha512",
+        "mysqlconnector.1.0.0.nupkg.sha512",
         "mysqlconnector.nuspec"
       ]
     },
@@ -6714,6 +6716,7 @@
       "Microsoft.EntityFrameworkCore.Relational >= 3.1.10",
       "Microsoft.EntityFrameworkCore.Tools >= 3.1.10",
       "MySql.Data.EntityFrameworkCore >= 8.0.22",
+      "MySqlConnector >= 1.0.0",
       "Pomelo.EntityFrameworkCore.MySql >= 3.2.4",
       "Swashbuckle.AspNetCore >= 5.6.3"
     ]
@@ -6789,6 +6792,10 @@
             "target": "Package",
             "version": "[8.0.22, )"
           },
+          "MySqlConnector": {
+            "target": "Package",
+            "version": "[1.0.0, )"
+          },
           "Pomelo.EntityFrameworkCore.MySql": {
             "target": "Package",
             "version": "[3.2.4, )"
@@ -6819,5 +6826,17 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.101\\RuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1608",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Version du package détectée en dehors de la contrainte de dépendance : Pomelo.EntityFrameworkCore.MySql 3.2.4 nécessite MySqlConnector (>= 0.69.9 && < 1.0.0) alors que la version MySqlConnector 1.0.0 a été résolue.",
+      "libraryId": "MySqlConnector",
+      "targetGraphs": [
+        "net5.0"
+      ]
+    }
+  ]
 }

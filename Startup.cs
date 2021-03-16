@@ -32,6 +32,7 @@ namespace Rocket_Elevators_Rest_API
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Rocket_Elevators_Rest_API", Version = "v1" });
             });
+            services.AddTransient<AppDb>(_ => new AppDb(Configuration["ConnectionStrings:DefaultConnection"]));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
