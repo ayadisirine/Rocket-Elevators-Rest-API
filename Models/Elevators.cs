@@ -32,6 +32,24 @@ namespace Rocket_Elevators_Rest_API.Models
         {
             Db = db;
         }
+        public async Task UpdateAsync()
+        {
+            using var cmd = Db.Connection.CreateCommand();
+            cmd.CommandText = @"UPDATE `elevators` SET `status` = @status WHERE `Id` = @id;";
+            BindParams(cmd);
+            BindId(cmd);
+            await cmd.ExecuteNonQueryAsync();
+        }
+ 
+        private void BindId(MySqlCommand cmd)
+        {
+            cmd.Parameters.Add(new MySqlParameter
+            {
+                ParameterName = "@id",
+                DbType = DbType.Int32,
+                Value = Id,
+            });
+        }
 
         private void BindParams(MySqlCommand cmd)
         {
