@@ -9,6 +9,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Rocket_Elevators_Rest_API.Models;
+using Microsoft.EntityFrameworkCore;
+using Rocket_Elevators_Rest_API.Data;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 
@@ -23,16 +26,22 @@ namespace Rocket_Elevators_Rest_API
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+        //This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
 
             services.AddControllers();
+
+            services.AddDbContext<rocketelevators_developmentContext>(options =>
+            options.UseMySQL(Configuration.GetConnectionString("DefaultConnection")));
+
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Rocket_Elevators_Rest_API", Version = "v1" });
             });
         }
+
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

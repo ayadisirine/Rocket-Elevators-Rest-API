@@ -22,10 +22,10 @@ namespace Rocket_Elevators_Rest_API.Models
 
         public virtual Columns Column { get; set; }
 
-        internal AppDb Db { get; set; }
+       internal AppDb Db { get; set; }
 
         public Elevators()
-        {
+       {
         }
 
         internal Elevators(AppDb db)
@@ -34,8 +34,8 @@ namespace Rocket_Elevators_Rest_API.Models
         }
 
         private void BindParams(MySqlCommand cmd)
-        {
-            cmd.Parameters.Add(new MySqlParameter
+       {
+           cmd.Parameters.Add(new MySqlParameter
             {
                 ParameterName = "@status",
                 DbType = DbType.String,
