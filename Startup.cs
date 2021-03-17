@@ -11,6 +11,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Rocket_Elevators_Rest_API.Models;
+using Microsoft.EntityFrameworkCore;
+using Rocket_Elevators_Rest_API.Data;
 
 namespace Rocket_Elevators_Rest_API
 {
@@ -28,6 +31,10 @@ namespace Rocket_Elevators_Rest_API
         {
 
             services.AddControllers();
+            
+            services.AddDbContext<rocketelevators_developmentContext>(options =>
+            options.UseMySQL(Configuration.GetConnectionString("DefaultConnection")));
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Rocket_Elevators_Rest_API", Version = "v1" });
