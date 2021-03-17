@@ -30,7 +30,7 @@ namespace Rocket_Elevators_Rest_API.Models.Controllers
         {
           foreach(var column in _context.Columns.ToArray())
           {
-            if (elevator.ColumnId == column.Id)
+            if (elevator.Id == column.Id)
             {
               foreach (var battery in _context.Batteries.ToArray())
               {
