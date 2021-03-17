@@ -13,11 +13,11 @@ namespace Rocket_Elevators_Rest_API.Models.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class columnsController : ControllerBase
+    public class ColumnsController : ControllerBase
     {
         private readonly rocketelevators_developmentContext _context;
 
-        public columnsController(rocketelevators_developmentContext context)
+        public ColumnsController(rocketelevators_developmentContext context)
         {
             _context = context;
         }
@@ -75,24 +75,19 @@ namespace Rocket_Elevators_Rest_API.Models.Controllers
             return column;
         }
 
-        private bool ColumnExists(int id)
-        {
-            return _context.Columns.Any(e => e.Id == id);
-        }
         
         // PUT: api/columns/id/updatestatus        
-        [HttpPut("{id}/Status")]
-        public async Task<IActionResult> PutmodifyColumnStatus(long id, string Status)
+     [HttpPut("{id}")]
+        public async Task<IActionResult> PutmodifyColumnsStatus(long id, [FromBody] Columns body)
         {
-            if (Status == null)
-            {
+
+
+
+            if (body.Status == null)
                 return BadRequest();
-            }
 
             var column = await _context.Columns.FindAsync(id);
-
-            column.Status = Status;
-
+            column.Status = body.Status;          
             try
             {
                 await _context.SaveChangesAsync();
@@ -100,16 +95,12 @@ namespace Rocket_Elevators_Rest_API.Models.Controllers
             catch (DbUpdateConcurrencyException)
             {
                 if (!columnExists(id))
-                {
                     return NotFound();
-                }
                 else
-                {
                     throw;
-                }
             }
 
-            return NoContent();
+            return new OkObjectResult("success");
         }
         
         [HttpGet("{id}/status")]
