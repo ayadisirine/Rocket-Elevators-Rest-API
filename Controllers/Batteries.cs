@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 using Rocket_Elevators_Rest_API.Models;
 using Microsoft.EntityFrameworkCore;
 using Rocket_Elevators_Rest_API.Data;
-
 using Pomelo.EntityFrameworkCore.MySql;
 
 
@@ -47,17 +46,16 @@ namespace Rocket_Elevators_Rest_API.Models.Controllers
 
         
      [HttpPut("{id}")]
-        public async Task<IActionResult> PutmodifyBatterisStatus(long id, string Status)
+        public async Task<IActionResult> PutmodifyBatterisStatus(long id, [FromBody] Batteries body)
         {
-            if (Status == null)
-            {
-                return BadRequest();
-            }
-            
-            var battery = await _context.Batteries.FindAsync(id);
-            battery.Status = Status;
 
-          
+
+
+            if (body.Status == null)
+                return BadRequest();
+
+            var battery = await _context.Batteries.FindAsync(id);
+            battery.Status = body.Status;          
             try
             {
                 await _context.SaveChangesAsync();
@@ -65,16 +63,12 @@ namespace Rocket_Elevators_Rest_API.Models.Controllers
             catch (DbUpdateConcurrencyException)
             {
                 if (!BatteriesExists(id))
-                {
                     return NotFound();
-                }
                 else
-                {
                     throw;
-                }
             }
 
-            return NoContent();
+            return new OkObjectResult("success");
         }
 
 

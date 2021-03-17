@@ -575,6 +575,8 @@ namespace Rocket_Elevators_Rest_API.Data
                 entity.Property(e => e.ProjectName)
                     .HasColumnName("project_name")
                     .HasMaxLength(255);
+
+                entity.Property(e => e.ContactRequestDate).HasColumnName("contact_request_date");
             });
 
             modelBuilder.Entity<Quotes>(entity =>
