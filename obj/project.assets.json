@@ -6722,25 +6722,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\izere\\.nuget\\packages\\": {},
-    "C:\\Microsoft\\Xamarin\\NuGet\\": {}
+    "C:\\Users\\HP\\.nuget\\packages\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\izere\\Rocket-Elevators-Rest-API\\Rocket-Elevators-Rest-API.csproj",
+      "projectUniqueName": "C:\\Users\\HP\\Desktop\\Ines\\Rocket-Elevators-Rest-API\\Rocket-Elevators-Rest-API.csproj",
       "projectName": "Rocket-Elevators-Rest-API",
-      "projectPath": "C:\\Users\\izere\\Rocket-Elevators-Rest-API\\Rocket-Elevators-Rest-API.csproj",
-      "packagesPath": "C:\\Users\\izere\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\izere\\Rocket-Elevators-Rest-API\\obj\\",
+      "projectPath": "C:\\Users\\HP\\Desktop\\Ines\\Rocket-Elevators-Rest-API\\Rocket-Elevators-Rest-API.csproj",
+      "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\HP\\Desktop\\Ines\\Rocket-Elevators-Rest-API\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Microsoft\\Xamarin\\NuGet\\"
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\izere\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net5.0"
@@ -6824,7 +6823,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.101\\RuntimeIdentifierGraph.json"
       }
     }
   },
@@ -6833,7 +6832,7 @@
       "code": "NU1608",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Detected package version outside of dependency constraint: Pomelo.EntityFrameworkCore.MySql 3.2.4 requires MySqlConnector (>= 0.69.9 && < 1.0.0) but version MySqlConnector 1.3.1 was resolved.",
+      "message": "Version du package détectée en dehors de la contrainte de dépendance : Pomelo.EntityFrameworkCore.MySql 3.2.4 nécessite MySqlConnector (>= 0.69.9 && < 1.0.0) alors que la version MySqlConnector 1.3.1 a été résolue.",
       "libraryId": "MySqlConnector",
       "targetGraphs": [
         "net5.0"
