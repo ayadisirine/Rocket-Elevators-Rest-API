@@ -45,7 +45,11 @@ namespace Rocket_Elevators_Rest_API.Controllers
             var query = new ElevatorsQuery(Db);
             var result = await query.FindOneAsync(id);
             if (result is null)
-                return new NotFoundResult();            
+                return new NotFoundResult();    
+            if (body is null)
+                return new NotFoundObjectResult("You should enter a value for the status");
+            if (body.Status.ToLower() != "intervention" && body.Status.ToLower() != "active" && body.Status.ToLower() != "inactive")
+                return new NotFoundObjectResult("Invalide status !!!");        
 
             result.Status = body.Status;
             await result.UpdateAsync();
