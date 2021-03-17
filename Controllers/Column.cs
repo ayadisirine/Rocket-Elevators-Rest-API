@@ -80,9 +80,9 @@ namespace Rocket_Elevators_Rest_API.Models.Controllers
             return _context.Columns.Any(e => e.Id == id);
         }
         
-        // PUT: api/columns/id/updatestatus        
+       //PUT: api/columns/id/updatestatus        
         [HttpPut("{id}/Status")]
-        public async Task<IActionResult> PutmodifyColumnStatus(long id, string Status)
+        public async Task<IActionResult> PutmodifyColumnStatus( long id, string Status)
         {
             if (Status == null)
             {
@@ -99,7 +99,7 @@ namespace Rocket_Elevators_Rest_API.Models.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!columnExists(id))
+                if (!ColumnExists(id))
                 {
                     return NotFound();
                 }
@@ -111,22 +111,50 @@ namespace Rocket_Elevators_Rest_API.Models.Controllers
 
             return NoContent();
         }
-        
-        [HttpGet("{id}/status")]
-        public async Task<ActionResult<string>> GetcolumnStatus(long id)
-        {
-            var columns = await _context.Columns.FindAsync(id);
+        // [HttpPut("{id}")]
+        // public async Task<IActionResult> PutColumn(long id, Columns column)
+        // {
+        //     if (id != column.Id)
+        //     {
+        //         return BadRequest();
+        //     }
 
-            if (columns == null)
+        //     _context.Entry(column).State = EntityState.Modified;
+
+        //     try
+        //     {
+        //         await _context.SaveChangesAsync();
+        //     }
+        //     catch (DbUpdateConcurrencyException)
+        //     {
+        //         if (!ColumnExists(id))
+        //         {
+        //             return NotFound();
+        //         }
+        //         else
+        //         {
+        //             throw;
+        //         }
+        //     }
+
+        //     return NoContent();
+        // }
+
+
+        [HttpGet("{id}/status")]
+        public async Task<ActionResult<string>> GetColumnStatus([FromRoute] long id)
+        {
+            var column = await _context.Columns.FindAsync(id);
+
+            if (column == null)
             {
                 return NotFound();
             }
 
-            return columns.Status;
-            
+            return column.Status;
         }
 
-        private bool columnExists(long id)
+        private bool ColumnExists(long id)
         {
             return _context.Columns.Any(e => e.Id == id);
         }

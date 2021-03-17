@@ -40,7 +40,7 @@ namespace Rocket_Elevators_Rest_API.Data
             if (!optionsBuilder.IsConfigured)
             {
             #warning "To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings."
-                optionsBuilder.UseMySQL("Server=localhost;Port=3306;Database=rocketelevators_development;Uid=root;Pwd=Pa$$w0rd!;");
+            optionsBuilder.UseMySQL("Server=localhost;Port=3306;Database=rocketelevators_development;Uid=root;Pwd=Pa$$w0rd!;");
             }
         }    
 
