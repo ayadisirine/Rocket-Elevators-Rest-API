@@ -717,19 +717,11 @@
           "lib/netstandard2.1/MySql.Data.EntityFrameworkCore.dll": {}
         }
       },
-<<<<<<< HEAD
       "MySqlConnector/1.3.1": {
         "runtime": {
           "lib/net5.0/MySqlConnector.dll": {
             "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.3.1.0"
-=======
-      "MySqlConnector/1.0.0": {
-        "runtime": {
-          "lib/net5.0/MySqlConnector.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.0.0"
->>>>>>> main
           }
         },
         "compile": {
@@ -798,11 +790,7 @@
       "Pomelo.EntityFrameworkCore.MySql/3.2.4": {
         "dependencies": {
           "Microsoft.EntityFrameworkCore.Relational": "3.1.10",
-<<<<<<< HEAD
           "MySqlConnector": "1.3.1",
-=======
-          "MySqlConnector": "1.0.0",
->>>>>>> main
           "Pomelo.JsonObject": "2.2.1"
         },
         "runtime": {
