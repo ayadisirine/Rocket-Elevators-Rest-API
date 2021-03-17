@@ -44,27 +44,44 @@ namespace Rocket_Elevators_Rest_API.Models.Controllers
 
             return column;
         }
-
+      
+      
+        
+        // POST: api/Columns
        
-        //Action that recuperates the status of a given column
-        [HttpGet("{id}/status")]
-        public async Task<ActionResult<string>> GetcolumnStatus(long id)
+        [HttpPost]
+        public async Task<ActionResult<Columns>> PostColumn(Columns column)
         {
-            var columns = await _context.Columns.FindAsync(id);
+            _context.Columns.Add(column);
+            await _context.SaveChangesAsync();
 
-            if (columns == null)
+            return CreatedAtAction("GetColumn", new { id = column.Id }, column);
+        }
+
+        //Action that recuperates the status of a given column
+        
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<Columns>> DeleteColumn(int id)
+        {
+            var column = await _context.Columns.FindAsync(id);
+            if (column == null)
             {
                 return NotFound();
             }
 
-            return columns.Status;
-            
+            _context.Columns.Remove(column);
+            await _context.SaveChangesAsync();
+
+            return column;
         }
 
-        
+        private bool ColumnExists(int id)
+        {
+            return _context.Columns.Any(e => e.Id == id);
+        }
         
         // PUT: api/columns/id/updatestatus        
-        [HttpPut("{id}/updatestatus")]
+        [HttpPut("{id}/Status")]
         public async Task<IActionResult> PutmodifyColumnStatus(long id, string Status)
         {
             if (Status == null)
@@ -82,7 +99,7 @@ namespace Rocket_Elevators_Rest_API.Models.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!columnsExists(id))
+                if (!columnExists(id))
                 {
                     return NotFound();
                 }
@@ -94,8 +111,22 @@ namespace Rocket_Elevators_Rest_API.Models.Controllers
 
             return NoContent();
         }
+        
+        [HttpGet("{id}/status")]
+        public async Task<ActionResult<string>> GetcolumnStatus(long id)
+        {
+            var columns = await _context.Columns.FindAsync(id);
 
-        private bool columnsExists(long id)
+            if (columns == null)
+            {
+                return NotFound();
+            }
+
+            return columns.Status;
+            
+        }
+
+        private bool columnExists(long id)
         {
             return _context.Columns.Any(e => e.Id == id);
         }

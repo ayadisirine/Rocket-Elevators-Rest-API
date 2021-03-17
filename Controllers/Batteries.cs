@@ -32,8 +32,8 @@ namespace Rocket_Elevators_Rest_API.Models.Controllers
         }
 
         // GET: api/Batteries/{id}
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Batteries>> GetBatteries(long id)
+      [HttpGet("{id}")]
+        public async Task<ActionResult<Batteries>> GetBattery(long id)
         {
             var battery = await _context.Batteries.FindAsync(id);
 
@@ -45,30 +45,7 @@ namespace Rocket_Elevators_Rest_API.Models.Controllers
             return battery;
         }
 
-        // GET: api/Batteries/{id}/status
-        [HttpGet("{id}/Status")]
-        public async Task<ActionResult<string>> GetBatteryStatus( long id)
-        {
-            var battery = await _context.Batteries.FindAsync(id);
-
-            if (battery == null)
-            {
-                return NotFound();
-            }
-
-            return battery.Status;
-        }
-
-        // POST: api/Batteries/{id}/status
-      //  [HttpPost]
-      //   public async Task<ActionResult<Batteries>> PostBattery(Batteries battery)
-      //   {
-      //       _context.Batteries.Add(battery);
-      //       await _context.SaveChangesAsync();
-
-      //       return CreatedAtAction("GetBattery", new { id = battery.Id }, battery);
-      //   }
-
+        
      [HttpPut("{id}")]
         public async Task<IActionResult> PutmodifyBatterisStatus(long id, string Status)
         {
@@ -81,7 +58,6 @@ namespace Rocket_Elevators_Rest_API.Models.Controllers
             battery.Status = Status;
 
           
-
             try
             {
                 await _context.SaveChangesAsync();
@@ -101,21 +77,47 @@ namespace Rocket_Elevators_Rest_API.Models.Controllers
             return NoContent();
         }
 
-      // // DELETE: api/Batteries/5
-      //   [HttpDelete("{id}")]
-      //   public async Task<ActionResult<Batteries>> DeleteBattery(int id)
-      //   {
-      //       var battery = await _context.Batteries.FindAsync(id);
-      //       if (battery == null)
-      //       {
-      //           return NotFound();
-      //       }
 
-      //       _context.Batteries.Remove(battery);
-      //       await _context.SaveChangesAsync();
+        // GET: api/Batteries/{id}/status
+        [HttpGet("{id}/Status")]
+        public async Task<ActionResult<string>> GetBatteryStatus( long id)
+        {
+            var battery = await _context.Batteries.FindAsync(id);
 
-      //       return battery;
-      //   }
+            if (battery == null)
+            {
+                return NotFound();
+            }
+
+            return battery.Status;
+        }
+
+       // POST: api/Batteries/{id}/status
+       [HttpPost]
+        public async Task<ActionResult<Batteries>> PostBattery(Batteries battery)
+        {
+            _context.Batteries.Add(battery);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetBattery", new { id = battery.Id }, battery);
+        }
+
+     
+      // DELETE: Batteries
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<Batteries>> DeleteBattery(int id)
+        {
+            var battery = await _context.Batteries.FindAsync(id);
+            if (battery == null)
+            {
+                return NotFound();
+            }
+
+            _context.Batteries.Remove(battery);
+            await _context.SaveChangesAsync();
+
+            return battery;
+        }
 
         private bool BatteriesExists(long id)
         {
