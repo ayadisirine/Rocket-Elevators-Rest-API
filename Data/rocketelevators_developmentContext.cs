@@ -496,6 +496,11 @@ namespace Rocket_Elevators_Rest_API.Data
                     .HasColumnName("id")
                     .HasColumnType("bigint(20)");
 
+                entity.Property(e => e.SerialNumber)
+                    .IsRequired()
+                    .HasColumnName("serial_number")
+                    .HasMaxLength(255);
+
                 entity.Property(e => e.Status)
                     .IsRequired()
                     .HasColumnName("status")
