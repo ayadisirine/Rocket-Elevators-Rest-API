@@ -173,3 +173,8 @@ C:\Users\izere\Rocket-Elevators-Rest-API\obj\Debug\net5.0\scopedcss\bundle\Rocke
 C:\Users\izere\Rocket-Elevators-Rest-API\obj\Debug\net5.0\Rocket-Elevators-Rest-API.RazorTargetAssemblyInfo.cache
 C:\Users\izere\Rocket-Elevators-Rest-API\obj\Debug\net5.0\Rocket-Elevators-Rest-API.csproj.CopyComplete
 C:\Users\izere\Rocket-Elevators-Rest-API\obj\Debug\net5.0\Rocket-Elevators-Rest-API.genruntimeconfig.cache
+C:\Users\izere\Rocket-Elevators-Rest-API\bin\Debug\net5.0\publish\web.config
+C:\Users\izere\Rocket-Elevators-Rest-API\bin\Debug\net5.0\publish\appsettings.Development.json
+C:\Users\izere\Rocket-Elevators-Rest-API\bin\Debug\net5.0\publish\appsettings.json
+C:\Users\izere\Rocket-Elevators-Rest-API\bin\Debug\net5.0\publish\Rocket-Elevators-Rest-API.deps.json
+C:\Users\izere\Rocket-Elevators-Rest-API\bin\Debug\net5.0\publish\Rocket-Elevators-Rest-API.runtimeconfig.json
