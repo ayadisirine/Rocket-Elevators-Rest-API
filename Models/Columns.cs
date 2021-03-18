@@ -11,7 +11,7 @@ namespace Rocket_Elevators_Rest_API.Models
         }
 
         public long Id { get; set; }
-        public long? BatteryId { get; set; }
+        public long? battery_id { get; set; }
         public int? NumberOfFloorsServed { get; set; }
         public string Status { get; set; }
         public string Information { get; set; }

@@ -115,7 +115,7 @@ namespace Rocket_Elevators_Rest_API.Data
             {
                 entity.ToTable("batteries");
 
-                entity.HasIndex(e => e.BuildingId)
+                entity.HasIndex(e => e.building_id)
                     .HasName("index_batteries_on_building_id");
 
                 entity.Property(e => e.Id)
@@ -126,7 +126,7 @@ namespace Rocket_Elevators_Rest_API.Data
                     .HasColumnName("battery_type")
                     .HasMaxLength(255);
 
-                entity.Property(e => e.BuildingId)
+                entity.Property(e => e.building_id)
                     .HasColumnName("building_id")
                     .HasColumnType("bigint(20)");
 
@@ -156,7 +156,7 @@ namespace Rocket_Elevators_Rest_API.Data
 
                 entity.HasOne(d => d.Building)
                     .WithMany(p => p.Batteries)
-                    .HasForeignKey(d => d.BuildingId)
+                    .HasForeignKey(d => d.building_id)
                     .HasConstraintName("fk_rails_fc40470545");
             });
 
@@ -391,14 +391,14 @@ namespace Rocket_Elevators_Rest_API.Data
             {
                 entity.ToTable("columns");
 
-                entity.HasIndex(e => e.BatteryId)
+                entity.HasIndex(e => e.battery_id)
                     .HasName("index_columns_on_battery_id");
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
                     .HasColumnType("bigint(20)");
 
-                entity.Property(e => e.BatteryId)
+                entity.Property(e => e.battery_id)
                     .HasColumnName("battery_id")
                     .HasColumnType("bigint(20)");
 
@@ -424,7 +424,7 @@ namespace Rocket_Elevators_Rest_API.Data
 
                 entity.HasOne(d => d.Battery)
                     .WithMany(p => p.Columns)
-                    .HasForeignKey(d => d.BatteryId)
+                    .HasForeignKey(d => d.battery_id)
                     .HasConstraintName("fk_rails_021eb14ac4");
             });
 

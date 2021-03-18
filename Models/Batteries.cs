@@ -11,7 +11,7 @@ namespace Rocket_Elevators_Rest_API.Models
         }
 
         public long Id { get; set; }
-        public long? BuildingId { get; set; }
+        public long? building_id { get; set; }
         public string Status { get; set; }
         public DateTime? DateCommissioning { get; set; }
         public DateTime? DateLastInspection { get; set; }

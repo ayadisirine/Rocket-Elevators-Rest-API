@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "QHGoQMRVWCq5llgQu5IyZv8KrrX4WicGgMlaAZi3gVMX1WFnkgi5mYHimCpv78bw2uATY2ynmTD8zGfb6aGSSA==",
+  "dgSpecHash": "c1G0g84hWMeStT3uLsHPB5SUk22JewZl0vHk0RdcjGemKUn0hj4qzBr4YAGDSRzOQGWMF7tS3wrEOVz1ZV9IzQ==",
   "success": true,
-  "projectFilePath": "c:\\Users\\izere\\Rocket-Elevators-Rest-API\\Rocket-Elevators-Rest-API.csproj",
+  "projectFilePath": "C:\\Users\\izere\\Rocket-Elevators-Rest-API\\Rocket-Elevators-Rest-API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\izere\\.nuget\\packages\\bouncycastle.netcore\\1.8.3\\bouncycastle.netcore.1.8.3.nupkg.sha512",
     "C:\\Users\\izere\\.nuget\\packages\\google.protobuf\\3.11.4\\google.protobuf.3.11.4.nupkg.sha512",
@@ -133,12 +133,6 @@
     "C:\\Users\\izere\\.nuget\\packages\\system.xml.xpath.xmldocument\\4.0.1\\system.xml.xpath.xmldocument.4.0.1.nupkg.sha512"
   ],
   "logs": [
-    {
-      "code": "Undefined",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Problem reading the cache file c:\\Users\\izere\\Rocket-Elevators-Rest-API\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'logs[0].warningLevel', line 140, position 0."
-    },
     {
       "code": "NU1608",
       "level": "Warning",
