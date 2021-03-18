@@ -2,6 +2,10 @@ using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Rocket_Elevators_Rest_API.Models;
+using Rocket_Elevators_Rest_API.Data;
+using System.Linq;
+using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
 
 
 namespace Rocket_Elevators_Rest_API.Controllers
@@ -9,53 +13,79 @@ namespace Rocket_Elevators_Rest_API.Controllers
     [Route("api/[controller]")]
     public class ElevatorsController : ControllerBase
     {
-        public ElevatorsController(AppDb db)
+        //Declare context attribute
+        private readonly rocketelevators_developmentContext _context;
+
+        //Constructor
+        public ElevatorsController(rocketelevators_developmentContext context)
         {
-            Db = db;
+            _context = context;
         }
+
 
         // GET api/elevators
         [HttpGet("status/{status}")]
-        public async Task<IActionResult> GetIdle(string status)
+        // User is free to check different status : in our case just make intervention 
+        public IEnumerable<Elevators> GetIntervention(string status)
         {
-            await Db.Connection.OpenAsync();
-            var query = new ElevatorsQuery(Db);
-            var result = await query.IdleElevatorsAsync(status);
-            if (result is null)
-                return new NotFoundResult();
-            return new OkObjectResult(result);
+            //Prepare the request 
+            IQueryable<Elevators> elevators = from l in _context.Elevators
+            //define condition status should be equal to given values 
+                                             where l.Status == status
+                                             select l;
+            //show results 
+            return elevators.ToList();
+
         }
 
         // GET api/elevators/id
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetOne(int id)
+        public async Task<ActionResult<Elevators>> Getelevators(long id)
         {
-            await Db.Connection.OpenAsync();
-            var query = new ElevatorsQuery(Db);
-            var result = await query.FindOneAsync(id);
-            if (result is null)
-                return new NotFoundResult();
-            return new OkObjectResult(result);
+            //Get the elevator having specified id 
+            var elevator = await _context.Elevators.FindAsync(id);
+            //check if no elevetor is returned 
+            if (elevator == null)
+            {
+                return NotFound();
+            }
+
+            return elevator;
         }
+        
         // PUT api/elevators/id
-        [HttpPost("{id}")]
-        public async Task<IActionResult> PostOne(int id, [FromBody] Elevators body)
+        // Request to change elevator status 
+         [HttpPut("{id}")]
+        public async Task<IActionResult> PutmodifyElevatorsStatus(long id, [FromBody] Elevators body)
         {
-            await Db.Connection.OpenAsync();
-            var query = new ElevatorsQuery(Db);
-            var result = await query.FindOneAsync(id);
-            if (result is null)
-                return new NotFoundResult();    
-            if (body is null)
-                return new NotFoundObjectResult("You should enter a value for the status");
-            if (body.Status.ToLower() != "intervention" && body.Status.ToLower() != "active" && body.Status.ToLower() != "inactive")
-                return new NotFoundObjectResult("Invalide status !!!");        
-
-            result.Status = body.Status;
-            await result.UpdateAsync();
-            return new OkObjectResult(result);
+            //check body 
+            if (body.Status == null)
+                return BadRequest();
+            //find corresponding elevator 
+            var elevator = await _context.Elevators.FindAsync(id);
+            //change status 
+            elevator.Status = body.Status;          
+            try
+            {
+                //save change 
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                //catch error - elevetor doesn't exist 
+                if (!elevatorExists(id))
+                    return NotFound();
+                else
+                    throw;
+            }
+            //return succeed message 
+            return new OkObjectResult("success");
         }
 
-        public AppDb Db { get; }
+        private bool elevatorExists(long id)
+        {
+            return _context.Elevators.Any(e => e.Id == id);
+        }
+
     }
 }
