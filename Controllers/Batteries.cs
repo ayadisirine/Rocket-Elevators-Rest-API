@@ -6,14 +6,13 @@ using Microsoft.AspNetCore.Mvc;
 using Rocket_Elevators_Rest_API.Models;
 using Microsoft.EntityFrameworkCore;
 using Rocket_Elevators_Rest_API.Data;
-
 using Pomelo.EntityFrameworkCore.MySql;
 
 
 
 namespace Rocket_Elevators_Rest_API.Models.Controllers
 {   [ApiController]
-    [Route("api/[controller]")]
+    [Route("[controller]")]
    
     public class BatteriesController : ControllerBase
     {
