@@ -7,45 +7,41 @@ using Rocket_Elevators_Rest_API.Data;
 
 namespace Rocket_Elevators_Rest_API.Models.Controllers
 {
-  [ApiController]
   [Route("api/[controller]")]
-  public class LeadsController : Controller
-  {
-    private rocketelevators_developmentContext _context;
-
-    public LeadsController(rocketelevators_developmentContext context)
+    [ApiController]
+    public class LeadController : ControllerBase
     {
-      _context = context;
-    }
+        private readonly rocketelevators_developmentContext _context;
 
-    public IActionResult Index()
-    {
-      List<Leads> leadList = new List<Leads>();
-
-      DateTime minimumTime = DateTime.Now - TimeSpan.FromDays(30);
-
-      foreach(var lead in _context.Leads.ToArray())
-      {
-        if (lead.ContactRequestDate > minimumTime)
+        public LeadController(rocketelevators_developmentContext context)
         {
-          foreach(var customer in _context.Customers.ToArray())
-          {
-            if (lead.CompanyName == customer.CompanyName)
-            {
-              if (leadList.Contains(lead))
-              {
-                continue;
-              }
-              else
-              {
-                leadList.Add(lead);
-              }
-            }
-          }
-        }
-      }
+            _context = context;
 
-      return Ok(leadList);
+        }
+
+        // To get full list of leads                                   
+        // GET: api/lead/all           
+        [HttpGet("all")]
+        public IEnumerable<Leads> GetLeads()
+        {
+            IQueryable<Leads> Leads =
+            from leaad in _context.Leads
+            select leaad;
+            return Leads.ToList();
+
+        }
+
+        
+         [HttpGet("notcustomers")]
+         public IEnumerable<Leads> GetLead()
+         {
+           DateTime today = DateTime.Now;
+          DateTime answer = today.AddDays(-30);
+            IQueryable<Leads> notCustomers =
+            from leaad in _context.Leads
+            where leaad.ContactRequestDate  >= answer
+            select leaad;
+            return notCustomers.ToList();
+         }               
     }
-  }
 }
