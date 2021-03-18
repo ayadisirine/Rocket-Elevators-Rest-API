@@ -489,17 +489,65 @@ namespace Rocket_Elevators_Rest_API.Data
 
             modelBuilder.Entity<Elevators>(entity =>
             {
-                entity.ToTable("elevators");
+               entity.ToTable("elevators");
 
+                entity.HasIndex(e => e.ColumnId)
+                    .HasName("index_elevators_on_column_id");
 
                 entity.Property(e => e.Id)
                     .HasColumnName("id")
                     .HasColumnType("bigint(20)");
 
+                entity.Property(e => e.CertificateOfInspection)
+                    .IsRequired()
+                    .HasColumnName("certificate_of_inspection")
+                    .HasMaxLength(255);
+
+                entity.Property(e => e.ColumnId)
+                    .HasColumnName("column_id")
+                    .HasColumnType("bigint(20)");
+
+                entity.Property(e => e.DateOfCommissioning)
+                    .HasColumnName("date_of_commissioning")
+                    .HasColumnType("date");
+
+                entity.Property(e => e.DateOfLastInspection)
+                    .HasColumnName("date_of_last_inspection")
+                    .HasColumnType("date");
+
+                entity.Property(e => e.ElevatorType)
+                    .HasColumnName("elevator_type")
+                    .HasMaxLength(255);
+
+                entity.Property(e => e.Information)
+                    .IsRequired()
+                    .HasColumnName("information")
+                    .HasMaxLength(255);
+
+                entity.Property(e => e.Model)
+                    .IsRequired()
+                    .HasColumnName("model")
+                    .HasMaxLength(255);
+
+                entity.Property(e => e.Notes)
+                    .HasColumnName("notes")
+                    .HasMaxLength(255);
+
+                entity.Property(e => e.SerialNumber)
+                    .IsRequired()
+                    .HasColumnName("serial_number")
+                    .HasMaxLength(255);
+
                 entity.Property(e => e.Status)
                     .IsRequired()
                     .HasColumnName("status")
                     .HasMaxLength(255);
+
+                entity.HasOne(d => d.Column)
+                    .WithMany(p => p.Elevators)
+                    .HasForeignKey(d => d.ColumnId)
+                    .HasConstraintName("fk_rails_69442d7bc2");
+
 
             });
 

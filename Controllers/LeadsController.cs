@@ -7,45 +7,43 @@ using Rocket_Elevators_Rest_API.Data;
 
 namespace Rocket_Elevators_Rest_API.Models.Controllers
 {
-  [ApiController]
   [Route("api/[controller]")]
-  public class LeadsController : Controller
-  {
-    private rocketelevators_developmentContext _context;
-
-    public LeadsController(rocketelevators_developmentContext context)
+    [ApiController]
+    public class LeadsController : ControllerBase
     {
-      _context = context;
-    }
-
-    public IActionResult Index()
-    {
-      List<Leads> leadList = new List<Leads>();
-
-      DateTime minimumTime = DateTime.Now - TimeSpan.FromDays(30);
-
-      foreach(var lead in _context.Leads.ToArray())
-      {
-        if (lead.ContactRequestDate > minimumTime)
+        //Create context attribute
+        private readonly rocketelevators_developmentContext _context;
+        //constructor 
+        public LeadsController(rocketelevators_developmentContext context)
         {
-          foreach(var customer in _context.Customers.ToArray())
-          {
-            if (lead.CompanyName == customer.CompanyName)
-            {
-              if (leadList.Contains(lead))
-              {
-                continue;
-              }
-              else
-              {
-                leadList.Add(lead);
-              }
-            }
-          }
+            _context = context;
         }
-      }
 
-      return Ok(leadList);
+        // Get list of leads                                    
+        // GET: api/leads           
+        [HttpGet]
+        public IEnumerable<Leads> GetLeads()
+        {
+          //Prepare the query 
+            IQueryable<Leads> Leads =
+            from l in _context.Leads
+            select l;
+            return Leads.ToList();
+
+        }
+        //Retrieving a list of Leads created in the last 30 days who have not yet become customers.
+        [HttpGet("30daysnotcustomers")]
+         public IEnumerable<Leads> GetLead()
+         {
+            //Set the date 
+            DateTime today = DateTime.Now;
+            DateTime answer = today.AddDays(-30);
+            //Prepare the query 
+            IQueryable<Leads> day30snotcustomers =
+            from l in _context.Leads
+            where l.ContactRequestDate  >= answer
+            select l;
+            return day30snotcustomers.ToList();
+         }               
     }
-  }
 }
