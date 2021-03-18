@@ -13,9 +13,10 @@ namespace Rocket_Elevators_Rest_API.Controllers
     [Route("api/[controller]")]
     public class ElevatorsController : ControllerBase
     {
-
+        //Declare context attribute
         private readonly rocketelevators_developmentContext _context;
 
+        //Constructor
         public ElevatorsController(rocketelevators_developmentContext context)
         {
             _context = context;
@@ -24,24 +25,26 @@ namespace Rocket_Elevators_Rest_API.Controllers
 
         // GET api/elevators
         [HttpGet("status/{status}")]
-        public async Task<ActionResult<Elevators>> GetIntervention(string status)
+        // User is free to check different status : in our case just make intervention 
+        public IEnumerable<Elevators> GetIntervention(string status)
         {
-            var elevator = await _context.Elevators.FindAsync(status);
+            //Prepare the request 
+            IQueryable<Elevators> elevators = from l in _context.Elevators
+            //define condition status should be equal to given values 
+                                             where l.Status == status
+                                             select l;
+            //show results 
+            return elevators.ToList();
 
-            if (elevator == null)
-            {
-                return NotFound();
-            }
-
-            return elevator;
         }
 
         // GET api/elevators/id
         [HttpGet("{id}")]
         public async Task<ActionResult<Elevators>> Getelevators(long id)
         {
+            //Get the elevator having specified id 
             var elevator = await _context.Elevators.FindAsync(id);
-
+            //check if no elevetor is returned 
             if (elevator == null)
             {
                 return NotFound();
@@ -49,30 +52,33 @@ namespace Rocket_Elevators_Rest_API.Controllers
 
             return elevator;
         }
+        
         // PUT api/elevators/id
-     [HttpPut("{id}")]
+        // Request to change elevator status 
+         [HttpPut("{id}")]
         public async Task<IActionResult> PutmodifyElevatorsStatus(long id, [FromBody] Elevators body)
         {
-
-
-
+            //check body 
             if (body.Status == null)
                 return BadRequest();
-
+            //find corresponding elevator 
             var elevator = await _context.Elevators.FindAsync(id);
+            //change status 
             elevator.Status = body.Status;          
             try
             {
+                //save change 
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
+                //catch error - elevetor doesn't exist 
                 if (!elevatorExists(id))
                     return NotFound();
                 else
                     throw;
             }
-
+            //return succeed message 
             return new OkObjectResult("success");
         }
 
