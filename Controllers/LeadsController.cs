@@ -9,39 +9,41 @@ namespace Rocket_Elevators_Rest_API.Models.Controllers
 {
   [Route("api/[controller]")]
     [ApiController]
-    public class LeadController : ControllerBase
+    public class LeadsController : ControllerBase
     {
+        //Create context attribute
         private readonly rocketelevators_developmentContext _context;
-
-        public LeadController(rocketelevators_developmentContext context)
+        //constructor 
+        public LeadsController(rocketelevators_developmentContext context)
         {
             _context = context;
-
         }
 
-        // To get full list of leads                                   
-        // GET: api/lead/all           
-        [HttpGet("all")]
+        // Get list of leads                                    
+        // GET: api/leads           
+        [HttpGet]
         public IEnumerable<Leads> GetLeads()
         {
+          //Prepare the query 
             IQueryable<Leads> Leads =
-            from leaad in _context.Leads
-            select leaad;
+            from l in _context.Leads
+            select l;
             return Leads.ToList();
 
         }
-
-        
-         [HttpGet("notcustomers")]
+        //Retrieving a list of Leads created in the last 30 days who have not yet become customers.
+        [HttpGet("30daysnotcustomers")]
          public IEnumerable<Leads> GetLead()
          {
-           DateTime today = DateTime.Now;
-          DateTime answer = today.AddDays(-30);
-            IQueryable<Leads> notCustomers =
-            from leaad in _context.Leads
-            where leaad.ContactRequestDate  >= answer
-            select leaad;
-            return notCustomers.ToList();
+            //Set the date 
+            DateTime today = DateTime.Now;
+            DateTime answer = today.AddDays(-30);
+            //Prepare the query 
+            IQueryable<Leads> day30snotcustomers =
+            from l in _context.Leads
+            where l.ContactRequestDate  >= answer
+            select l;
+            return day30snotcustomers.ToList();
          }               
     }
 }
