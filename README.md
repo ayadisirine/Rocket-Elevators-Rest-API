@@ -17,13 +17,13 @@ and for Changing ITS status you will use PUT and in Body => raw change on of ele
 If the results input is Success, use GET to see the resluts of the changed status.
 
 Toget the elevators in Interventio use :
-https://sirinerocketelevatorsrestapi.azurewebsites.net/api/elevators/status/intervention
+https://sirinerocketelevatorsrestapi.azurewebsites.net/api/elevators/status/intervention, 
 and to GET inactive you can use 
 https://sirinerocketelevatorsrestapi.azurewebsites.net/api/elevators/status/inactive
 
 This will be the same for Batteries and Columns. If you want to see all the batteries for example, use GET
 https://sirinerocketelevatorsrestapi.azurewebsites.net/api/Batteries
-columns
+, and for columns
 https://sirinerocketelevatorsrestapi.azurewebsites.net/api/Columns
 
 to retrieve the information use the same link /(the id in numbers of the battery you want) for example here we want one so we use  https://sirinerocketelevatorsrestapi.azurewebsites.net/api/Batteries/1
