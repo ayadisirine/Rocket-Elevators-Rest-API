@@ -41,7 +41,7 @@ https://sirinerocketelevatorsrestapi.azurewebsites.net/api/Buildings/Interventio
 
 For the Lead, to Get all the Leads
 https://sirinerocketelevatorsrestapi.azurewebsites.net/api/Leads
-and to Retrieving a list of Leads created in the last 30 days who have not yet become customers
+and to retrieve a list of Leads created in the last 30 days who have not yet become customers
 https://sirinerocketelevatorsrestapi.azurewebsites.net/api/Leads/30daysnotcustomers
 
 So in more Details with Codes:
