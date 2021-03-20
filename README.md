@@ -6,7 +6,7 @@
 In this project we Created Rest Apis for Rocket Elevators. and the link for our differents Apis are below and you can test it in Postman
 here is example of how u can access our api
 
-1. For Elevator to retrive, for example elevator with id==3, you use GET
+For Elevator to retrive, for example elevator with id==3, you use GET
 
 https://sirinerocketelevatorsrestapi.azurewebsites.net/api/elevators/3
 and for Changing ITS status you will use PUT and in Body => raw change on of elevator status ("Active" or "Inactive" or "Intervention") in Json format like this:
